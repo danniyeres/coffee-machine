@@ -16,17 +16,6 @@ public class InventoryService {
 
 
     /**
-     * @param name is the name of the ingredient
-     * @param quantity to refill
-     */
-    public void refillIngredient(String name, int quantity) {
-        var ingredient = repository.findByName(name);
-        ingredient.setQuantity(ingredient.getQuantity() + quantity);
-        repository.save(ingredient);
-        log.info("Ingredient {} refilled by {}", name, quantity);
-    }
-
-    /**
     * Deducts the quantity of the ingredient by the specified amount.
     * @param name the name of the ingredient
     * @param amount the amount to deduct
@@ -41,8 +30,7 @@ public class InventoryService {
                 throw new IllegalArgumentException("Not enough " + name + "!");
             }
 
-            ingredient.setQuantity(ingredient.getQuantity() - amount);
-            repository.save(ingredient);
+            repository.deductIngredientQuantity(name, amount);
 
             switch (name) {
                 case "milk":
@@ -109,8 +97,7 @@ public class InventoryService {
         if (ingredient == null) {
             throw new IllegalArgumentException("Ingredient not found!");
         } else {
-            ingredient.setQuantity(ingredient.getQuantity() + amount);
-            repository.save(ingredient);
+            repository.addIngredientQuantity(name, amount);
             log.info("added {} {}", amount, name);
         }
     }

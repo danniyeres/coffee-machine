@@ -1,11 +1,11 @@
 package org.example.coffeemachine.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.coffeemachine.model.Ingredient;
 import org.example.coffeemachine.service.InventoryService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,5 +21,10 @@ public class InventoryController {
             case "coffee beans" -> quantity + " g " + ingredient + " added";
             default -> quantity + " " + ingredient + " added";
         };
+    }
+
+    @GetMapping
+    public List<Ingredient> getIngredients() {
+        return inventoryService.getIngredients();
     }
 }
