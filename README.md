@@ -30,6 +30,9 @@ Coffee Machine is a Spring Boot application designed to manage coffee machine op
     mvn spring-boot:run
     ```
 
+### Testing Swagger API
+1. Open the Swagger UI at `http://localhost:8080/swagger-ui.html`.
+
 ## Configuration
 The application configuration is managed in the `src/main/resources/application.yml` file. Key configurations include:
 - Database connection
